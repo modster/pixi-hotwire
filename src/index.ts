@@ -5,15 +5,22 @@ const app = new Application({
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
 	backgroundColor: 0x6495ed,
-	width: 640,
-	height: 480
+	width: window.innerWidth,
+	height: window.innerHeight,
 });
 
-const clampy: Sprite = Sprite.from("clampy.png");
+const star: Sprite = Sprite.from("star.png");
 
-clampy.anchor.set(0.5);
+star.anchor.set(0.5);
 
-clampy.x = app.screen.width / 2;
-clampy.y = app.screen.height / 2;
+star.x = app.screen.width / 2;
+star.y = app.screen.height / 2;
 
-app.stage.addChild(clampy);
+app.stage.addChild(star);
+
+app.ticker.add((delta) => {
+    // just for fun, let's rotate mr rabbit a little
+    // delta is 1 if running at 100% performance
+    // creates frame-independent transformation
+    star.rotation += 0.01 * delta;
+});
